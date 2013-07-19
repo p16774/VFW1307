@@ -128,21 +128,68 @@ window.addEventListener("DOMContentLoaded", function() {
 	
 	var showChar = function () {
 		
-			//Write function to the browser
-			var makeDiv = document.createElement("div"),
-				makeList = document.createElement("ul");
-				
-			// write our data	
-			makeDiv.setAttribute("id", "charData");
-			makeDiv.appendChild(makeList);
-			
-			// Loop through localStorage
-			for(var i=0, j=localStorage.length; i<j; i++) {
-				
-				
-			};
+		// If statement to make sure we have data to display
 		
-		};
+			if (localStorage.length === 0) {
+				
+				alert("No character data to display!");
+				
+			} else {
+			
+				//Write function to the browser
+				var makeDiv = document.createElement("div"),
+					makeList = document.createElement("ul");
+					
+				// write our data	
+				makeDiv.setAttribute("id", "charData");
+				makeDiv.appendChild(makeList);
+				
+				//replace our form
+				replaceForm = $("displayData");
+				newLink = $("dispChar");
+				
+				replaceForm.innerHTML = "";
+				replaceForm.appendChild(makeDiv);
+				
+				newLink.innerHTML = "<a href=\"additem.html\" target=\"_self\" id=\"addChar\">Return to Home</a>";
+				
+				
+							
+				// Loop through localStorage
+				for(var i=0, j=localStorage.length; i<j; i++) {
+					
+					// create our List Item element
+					var makeLi = document.createElement("li");
+						makeList.appendChild(makeLi);
+					
+					// extract our data
+					var key = localStorage.key(i),
+						value = localStorage.getItem(key);
+						
+					// recreate our object from our localStorage data
+					var obj = JSON.parse(value);
+					
+					// write our data
+					var makeSubList = document.createElement("ul");
+					makeLi.appendChild(makeSubList);
+					
+					// loop through data for proper itemization
+					for(var n in obj) {
+						
+						var makeSubLi = document.createElement("li");
+						makeSubList.appendChild(makeSubLi);
+						
+						// create our actual text
+						var optSubText = obj[n][0] + ": " + obj[n][1];
+						makeSubLi.innerHTML = optSubText;
+						
+					}; // end for in loop
+									
+				}; // end for loop through localStorage
+				
+			}; // end if statement for displaying data
+			
+		}; // end function for displaying data
 	
 	displayChar.addEventListener("click", showChar);
 	
@@ -152,6 +199,19 @@ window.addEventListener("DOMContentLoaded", function() {
 	var clearChar = $("delChar");
 	
 	var deleteChar = function() {
+		
+			if (localStorage.length === 0) {
+				
+				alert("No current data to clear.");
+				
+			} else {
+				
+				localStorage.clear();
+				alert("All characters removed.");
+				window.location.reload();
+				return false;
+				
+			};
 		
 		};
 	
