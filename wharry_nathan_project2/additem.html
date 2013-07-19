@@ -4,7 +4,7 @@
 
 *********************
 Author: Nathan Wharry
-Title: Project 1 - D&D Character Sheet - Additems page
+Title: Project 2 - D&D Character Sheet - Additems page
 Term: VFW 1307
 *********************
 
@@ -21,9 +21,9 @@ Term: VFW 1307
     <meta name="robot" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-	<!--Stylesheet Link-->
-    <link rel="stylesheet" href="css/dnd_style.css">
-    
+	<!--Additional Document Links-->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+        
 	<title>D&D Character Sheet App</title>
 
 </head>
@@ -34,13 +34,13 @@ Term: VFW 1307
     
     <!--Start Form Entry-->
 
-	<form>
+	<form action="#" id="char_form">
     
     	<fieldset>
         	<!--Named Form Box to supply border around content fields-->
         	<legend>Character Information</legend>
 	
-            Name: <input type="text" value="" name="char_name"><br />
+            Name: <input type="text" value="" id="char_name"><br />
             Race: 
             
             <!--Selection Box for the Race input-->
@@ -56,29 +56,29 @@ Term: VFW 1307
             
             <!--Label for easy assignment for the gender field-->
             <label for="male">Male</label>
-            <label for="female">Female</label>
-            
-            <!--Input types for the gender field-->
-            <input type="radio" id="male" value="Male" name="char_gen"> 
-            <input type="radio" id="female" value="Female" name="char_gen"><br />
+            <input type="radio" id="male" value="Male" id="char_gen"> 
+
+            <label for="female">Female</label>            
+            <input type="radio" id="female" value="Female" id="char_gen"><br />
              
-            Class: <input type="text" value="" name="char_class"><br />
-            Age: <input type="number" value="" name="char_age"><br />
+            Class: <input type="text" value="" id="char_class"><br />
+            Age: <input type="number" value="" id="char_age"><br />
             
             <!--added slider for range and also numbered start and end points for easy association-->
-            Weight: 1 <input type="range" value="100" name="char_weigh" min="1" max="300"> 300<br />
-            BirthDay: <input type="date" value="" name="char_birth"><br />
+            Weight: <input type="range" value="100" id="char_weigh" min="1" max="300"> &nbsp;
+            <span id="number" class="weight">100</span><br />
+            BirthDay: <input type="date" value="" id="char_birth"><br />
             
             <!--added size attributes to fill a standard iPhone screen and make it look pretty-->
-            Brief Description: <br /><textarea value="" rows="5" cols="40" name="char_desc"></textarea><br />
+            Brief Description: <br /><textarea value="" rows="5" cols="40" id="char_desc"></textarea><br />
             
             <!--added version info for type of character, made hidden as this is all that's currently supported-->
-            <input type="hidden" value="3.5" name="version">
+            <input type="hidden" value="3.5" id="version">
             
         </fieldset>
         
         	<!--Submit button outside fieldset box for emphasis-->
-            <br /><input type="button" value="Add Character" name="char_submit"><br />
+            <br /><input type="button" value="Add Character" id="char_submit"><br />
     
     </form>
     
@@ -90,6 +90,8 @@ Term: VFW 1307
     
     <!--added break tags for spacing to keep a little white space at bottom of the page-->
     <br /><br />
+    
+<script type="text/javascript" src="js/main.js"></script>
 
 </body>
 

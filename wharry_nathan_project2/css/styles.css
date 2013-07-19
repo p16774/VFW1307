@@ -1,8 +1,21 @@
 @charset "UTF-8";
 /* CSS Document */
+
+/*
+
+*********************
+Author: Nathan Wharry
+Title: Project 2 - D&D Character Sheet - Stylesheet
+Term: VFW 1307
+*********************
+
+*/
+
+
+
 body {
 	background-image: url(../img/bg.jpg);
-	color: #fff;
+	color: #ffffff;
 }
 
 h1 {
@@ -22,7 +35,15 @@ p.main {
 }
 
 img.addchar {
-	width: 100%;
+	width: 300px;
+}
+
+span.weight {
+	color: #FFFF00;
+}
+
+a {
+	color: #FFFF00;
 }
 
 
