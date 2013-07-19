@@ -34,51 +34,47 @@ Term: VFW 1307
     
     <!--Start Form Entry-->
 
-	<form action="#" id="char_form">
+	<form action="#" method="post" id="char_form">
     
-    	<fieldset>
+    	<fieldset id="char_info">
         	<!--Named Form Box to supply border around content fields-->
         	<legend>Character Information</legend>
-	
-            Name: <input type="text" value="" id="char_name"><br />
-            Race: 
+			<ul id="errors"></ul>
+            <ul id="information">
             
-            <!--Selection Box for the Race input-->
-            <select id="char_race">
-            	<option value="Human">Human</option>
-                <option value="Elf">Elf</option>
-                <option value="Dwarf">Dwarf</option>
-                <option value="Half-Orc">Half-Orc</option>
-                <option value="Halfling">Halfling</option>
-            </select><br />
+            	<li><label for="char_name">Name: </label><input type="text" value="" id="char_name"></li>
+                <li id="select_race"><label for="char_race">Race: </label></li>            
+            	<li><label for="char_gen">Gender: &nbsp; </label>
             
-            Gender: &nbsp; 
-            
-            <!--Label for easy assignment for the gender field-->
-            <label for="male">Male</label>
-            <input type="radio" id="male" value="Male" id="char_gen"> 
-
-            <label for="female">Female</label>            
-            <input type="radio" id="female" value="Female" id="char_gen"><br />
+                    <!--Label for easy assignment for the gender field-->
+                    <label for="male">Male</label>
+                    <input type="radio" id="male" value="Male" name="char_gen"> 
+        
+                    <label for="female">Female</label>            
+                    <input type="radio" id="female" value="Female" name="char_gen"></li>
              
-            Class: <input type="text" value="" id="char_class"><br />
-            Age: <input type="number" value="" id="char_age"><br />
+            	<li><label for="char_class">Class: </label><input type="text" value="" id="char_class"></li>
+                <li><label for="char_age">Age: </label><input type="number" value="" id="char_age"></li>
+                
+                <!--added slider for range and value changing span through javascript-->
+                <li><label for="char_weigh">Weight: </label><input type="range" value="100" id="char_weigh" min="1" max="300"> &nbsp;
+                <span id="number" class="weight">100</span></li>
+                <li><label for="char_birth">BirthDay: </label><input type="date" value="" id="char_birth"></li>
             
-            <!--added slider for range and also numbered start and end points for easy association-->
-            Weight: <input type="range" value="100" id="char_weigh" min="1" max="300"> &nbsp;
-            <span id="number" class="weight">100</span><br />
-            BirthDay: <input type="date" value="" id="char_birth"><br />
+                <!--added size attributes to fill a standard iPhone screen and make it look pretty-->
+                <li><label for="char_desc">Brief Description: </label></li>
+                <li><textarea value="" rows="5" cols="40" id="char_desc"></textarea></li>
+                
+                <!--added version info for type of character, made hidden as this is all that's currently supported-->
+                <li><input type="hidden" value="3.5" id="version"></li>
             
-            <!--added size attributes to fill a standard iPhone screen and make it look pretty-->
-            Brief Description: <br /><textarea value="" rows="5" cols="40" id="char_desc"></textarea><br />
-            
-            <!--added version info for type of character, made hidden as this is all that's currently supported-->
-            <input type="hidden" value="3.5" id="version">
-            
+            </ul>
+                
+                
         </fieldset>
         
         	<!--Submit button outside fieldset box for emphasis-->
-            <br /><input type="button" value="Add Character" id="char_submit"><br />
+            <br /><input type="submit" value="Add Character" id="char_submit"><br />
     
     </form>
     
@@ -86,7 +82,7 @@ Term: VFW 1307
     <br /><br />
     
     <!--links for functions against current page data-->
-    <a href="#" target="_self">Clear Stored Data</a> &nbsp; <a href="#" target="_self">Display Stored Data</a>
+    <a href="#" target="_self" id="delChar">Clear Stored Data</a> &nbsp; <a href="#" target="_self" id="dispChar">Display Stored Data</a>
     
     <!--added break tags for spacing to keep a little white space at bottom of the page-->
     <br /><br />
