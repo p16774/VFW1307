@@ -97,11 +97,13 @@ window.addEventListener("DOMContentLoaded", function() {
 			
 			// create random number for unique id in local storage
 			var id = Math.floor(Math.random()*10000000);
+			var edit = false;
 			
 		} else {
 			
 			// use previous key to update character
 			var id = key;
+			var edit = true;
 			
 		};
 		
@@ -125,6 +127,17 @@ window.addEventListener("DOMContentLoaded", function() {
 						
 		// save our data into local storage
 		localStorage.setItem(id, itemData);
+		
+		// validation to change the alert message
+		if (edit === true) {
+			
+			alert("Character Updated Successfully!");
+			
+		} else {
+			
+			alert("New Character Created and Saved Successfully!");
+			
+		};
 		
 	};
 			
@@ -267,7 +280,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			var delText = "Delete Character";
 			
 			// listen for event to delete
-			//delLink.addEventListener("click", delItem);
+			delLink.addEventListener("click", delItem);
 			
 			// delete link creation
 			delLink.innerHTML = delText;
@@ -322,8 +335,38 @@ window.addEventListener("DOMContentLoaded", function() {
 			var editSubmit = $('char_submit');
 			
 			// create new event listener to run a new edit function and save key value for proper character editing
-			editSubmit.addEventListener("click", valChar);
+			//editSubmit.addEventListener("click", valChar);
 			editSubmit.key = this.key;
+			
+		};
+		
+		// delete selected character from localStorage
+		function delItem () {
+			
+			// get data from local storage with our character information
+			var value = localStorage.getItem(this.key);
+				item = JSON.parse(value);
+										
+			// populate our data with the item to be edited
+			var charName = item.char_name[1];
+			
+			// make sure we really want to delete the character
+			var ask = confirm("Are you sure you want to delete " + charName + " from the database?");
+			
+			// check conditional to delete or not delete
+			if (ask) {
+				
+				//remove from local storage
+				localStorage.removeItem(this.key);
+				alert("Character Removed.");
+				window.location.reload();
+				
+			} else {
+				
+				//alert that our data has not been deleted
+				alert("No characters have been removed!");
+				
+			};
 			
 		};
 		
