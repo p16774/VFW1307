@@ -4,7 +4,7 @@
 
 *********************
 Author: Nathan Wharry
-Title: Project 2 - D&D Character Sheet - Javascript
+Title: Project 3 - D&D Character Sheet - Javascript
 Term: VFW 1307
 *********************
 

@@ -5,7 +5,7 @@
 
 *********************
 Author: Nathan Wharry
-Title: Project 2 - D&D Character Sheet - Stylesheet
+Title: Project 3 - D&D Character Sheet - Stylesheet
 Term: VFW 1307
 *********************
 
@@ -61,6 +61,10 @@ a {
 
 #errors {
 	color: #FFFF00;
+}
+
+div#charData ul {
+	padding-bottom: 10px;
 }
 
 
