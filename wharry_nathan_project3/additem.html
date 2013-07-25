@@ -32,10 +32,19 @@ Term: VFW 1307
 
 	<h1>Character Sheet</h1>
     
+    <nav>
+        <!--links for functions against current page data-->
+        <a href="#" id="delChar">Clear Stored Data</a>
+        <a href="#" id="dispChar">Display Stored Data</a>
+        <a href="additem.html" id="newChar" style="display:none;">Add New Character</a>
+    </nav>
+    
+    <!--added break tags for spacing to keep a little white space at top of the page-->
+    <br />
+
+    
     <!--Start Form Entry-->
     
-    <div id="displayData">
-
 	<form action="#" method="post" id="char_form" onSubmit="return validate_form();">
     
     	<fieldset id="char_info">
@@ -77,19 +86,13 @@ Term: VFW 1307
         
         	<!--Submit button outside fieldset box for emphasis-->
             <br /><input type="submit" value="Add Character" id="char_submit"><br />
-    
+            
+            <!--added break tags for spacing without using paragraph tags-->
+            <br /><br />
+   
     </form>
+        
     
-    </div>
-    
-    <!--added break tags for spacing without using paragraph tags-->
-    <br /><br />
-    
-    <!--links for functions against current page data-->
-    <a href="#" id="delChar">Clear Stored Data</a> &nbsp; <a href="#" id="dispChar">Display Stored Data</a>
-    
-    <!--added break tags for spacing to keep a little white space at bottom of the page-->
-    <br /><br />
     
 <script type="text/javascript" src="js/main.js"></script>
 

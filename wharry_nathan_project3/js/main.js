@@ -123,12 +123,50 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 	addChar.addEventListener("click", storeChar);
 	
+	// function to toggle our form
+	function toggleControls(n) {
+		
+		// switch element to display data or display form
+		switch(n) {
+			
+			case "on":
+				
+				// hide the form and show the links
+				$('char_form').style.display = "none";
+				$('delChar').style.display = "inline";
+				$('dispChar').style.display = "none";
+				$('newChar').style.display = "inline";
+				
+				break;
+				
+			case "off":
+
+				// hide the form and show the links
+				$('char_form').style.display = "block";
+				$('delChar').style.display = "inline";
+				$('dispChar').style.display = "inline";
+				$('newChar').style.display = "none";
+				$('charData').style.display = "none";
+
+				break;
+				
+			default:
+				return false;
+				
+		}; // close switch element
+		
+		
+	};
+	
 	
 	// Display Data variables and functions **********
 	
 	var displayChar = $("dispChar");
 	
 	var showChar = function () {
+		
+		// toggle our display
+		toggleControls("on");
 		
 		// If statement to make sure we have data to display
 		
@@ -144,19 +182,10 @@ window.addEventListener("DOMContentLoaded", function() {
 					
 				// write our data	
 				makeDiv.setAttribute("id", "charData");
-				makeDiv.appendChild(makeList);
-				
-				//replace our form
-				replaceForm = $("displayData");
-				newLink = $("dispChar");
-				
-				replaceForm.innerHTML = "";
-				replaceForm.appendChild(makeDiv);
-				
-				newLink.innerHTML = "<a href=\"additem.html\" target=\"_self\" id=\"addChar\">Return to Home</a>";
-				
-				
-							
+				makeDiv.appendChild(makeList);	
+				document.body.appendChild(makeDiv);
+				$('charData').style.display = "block";
+								
 				// Loop through localStorage
 				for(var i=0, j=localStorage.length; i<j; i++) {
 					
@@ -207,7 +236,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			var editText = "Edit Character";
 			
 			// listen for event to edit
-			//editLink.addEventListener("click", editItem);
+			editLink.addEventListener("click", editItem);
 			
 			// edit link creation
 			editLink.innerHTML = editText;
@@ -229,6 +258,17 @@ window.addEventListener("DOMContentLoaded", function() {
 			// delete link creation
 			delLink.innerHTML = delText;
 			linksLi.appendChild(delLink);
+			
+		};
+		
+		// fuction to make it edit our items
+		function editItem() {
+			
+			// get data from local storage with our character information
+			var value = localStorage.getItem(this.key);
+				obj = JSON.parse(value);
+				
+				
 			
 		};
 	
