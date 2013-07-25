@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		// save our data into local storage
 		localStorage.setItem(id, itemData);
 		
-		};
+	};
 		
 	addChar.addEventListener("click", storeChar);
 	
@@ -218,7 +218,7 @@ window.addEventListener("DOMContentLoaded", function() {
 						
 					}; // end for in loop
 					
-					makeItemLinks(localStorage.key[i], linksLi); // function to create our edit/delete links for each item
+					makeItemLinks(localStorage.key(i), linksLi); // function to create our edit/delete links for each item
 									
 				}; // end for loop through localStorage
 				
@@ -266,9 +266,42 @@ window.addEventListener("DOMContentLoaded", function() {
 			
 			// get data from local storage with our character information
 			var value = localStorage.getItem(this.key);
-				obj = JSON.parse(value);
+				item = JSON.parse(value);
+							
+			// turn our toggle controls off to display form
+			toggleControls("off");
+			
+			// populate our data with the item to be edited
+			$('char_name').value = item.char_name[1];
+			$('char_race').value = item.char_race[1];
+			
+			var radios = document.forms[0].char_gen;
+			
+			// loop through to get selected radio button
+			for (var i=0; i<radios.length; i++) {
 				
+				// validate what is checked first
+				if(radios[i].value == "Male" && item.char_gen[1] == "Male") {
+						
+					//assign value if checked
+					radios[i].setAttribute("checked", "checked");
+						
+				} else if (radios[i].value == "Female" && item.char_gen[1] == "Female") {
+					
+					//assign value if checked
+					radios[i].setAttribute("checked", "checked");
+					
+				}; // end validation for what is checked
 				
+			};
+
+			$('char_class').value = item.char_class[1];
+			$('char_age').value = item.char_age[1];
+			$('char_weigh').value = item.char_weigh[1];
+			$('number').innerHTML = item.char_weigh[1]; // remember to change our display to show the correct slide position
+			$('char_birth').value = item.char_birth[1];
+			$('char_desc').value = item.char_desc[1];
+
 			
 		};
 	
