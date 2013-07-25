@@ -63,10 +63,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		span.innerHTML = weight.value;	
 		
-		};
-	
-	weight.addEventListener("change", displayWeight);
-	
+		};	
 	
 	// Store Data variables and functions **********
 	
@@ -93,10 +90,20 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 	};
 	
-	function storeChar() {
+	function storeChar(key) {
 		
-		// create random number for unique id in local storage
-		var id = Math.floor(Math.random()*10000000);
+		// pull in our argument for editing characters
+		if (!key) {
+			
+			// create random number for unique id in local storage
+			var id = Math.floor(Math.random()*10000000);
+			
+		} else {
+			
+			// use previous key to update character
+			var id = key;
+			
+		};
 		
 		// run needed data functions
 		genSelect();
@@ -120,9 +127,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		localStorage.setItem(id, itemData);
 		
 	};
-		
-	addChar.addEventListener("click", storeChar);
-	
+			
 	// function to toggle our form
 	function toggleControls(n) {
 		
@@ -168,6 +173,14 @@ window.addEventListener("DOMContentLoaded", function() {
 		// toggle our display
 		toggleControls("on");
 		
+		// remove all display data divs
+		if (document.getElementById('charData') != null) {
+			
+			remDiv = document.getElementById('charData');
+			remDiv.parentNode.removeChild(remDiv);
+			
+		};
+		
 		// If statement to make sure we have data to display
 		
 			if (localStorage.length === 0) {
@@ -179,11 +192,12 @@ window.addEventListener("DOMContentLoaded", function() {
 				//Write function to the browser
 				var makeDiv = document.createElement("div"),
 					makeList = document.createElement("ul");
-					
+										
 				// write our data	
 				makeDiv.setAttribute("id", "charData");
-				makeDiv.appendChild(makeList);	
 				document.body.appendChild(makeDiv);
+				makeDiv.appendChild(makeList);	
+
 				$('charData').style.display = "block";
 								
 				// Loop through localStorage
@@ -301,12 +315,102 @@ window.addEventListener("DOMContentLoaded", function() {
 			$('number').innerHTML = item.char_weigh[1]; // remember to change our display to show the correct slide position
 			$('char_birth').value = item.char_birth[1];
 			$('char_desc').value = item.char_desc[1];
-
+			
+			// change our submit button properties to edit data
+			//addChar.removeEventListener("click", valChar);
+			$('char_submit').value = "Edit Character";
+			var editSubmit = $('char_submit');
+			
+			// create new event listener to run a new edit function and save key value for proper character editing
+			editSubmit.addEventListener("click", valChar);
+			editSubmit.key = this.key;
 			
 		};
-	
-	displayChar.addEventListener("click", showChar);
-	
+		
+		// validate character function for editing
+		function valChar(e) {
+			
+			// elements we need to validate in our form
+			var getCharName = $("char_name");
+			var getCharRace = $("char_race");
+			var getCharClass = $("char_class");
+			var getCharWeight = $("char_weigh");
+			
+			// reset our error messages array
+			errMsg.innerHTML = "";
+			getCharName.style.border = "";
+			getCharRace.style.border = "";
+			getCharClass.style.border = "";
+			getCharWeight.style.border = "";
+
+			// error messages
+			var errMessages = [];
+			
+			// Name Validation
+			if (getCharName.value === "") {
+				
+				// name error message
+				var nameError = "Please enter a character name.";
+				getCharName.style.border = "1px solid #FFFF00";
+				errMessages.push(nameError);
+				
+			};
+
+			// Race Validation
+			if (getCharRace.value == "--Choose A Race--") {
+				
+				// race error message
+				var raceError = "Please select a valid race.";
+				getCharRace.style.border = "1px solid #FFFF00";
+				errMessages.push(raceError);
+				
+			};
+			
+			// Class Validation
+			if (getCharClass.value === "") {
+				
+				// class error message
+				var classError = "Please enter a character class.";
+				getCharClass.style.border = "1px solid #FFFF00";
+				errMessages.push(classError);
+				
+			};
+			
+			// Weight Validation
+			if (getCharWeight.value == "0") {
+				
+				// weight error message
+				var weightError = "Please move slider for proper weight";
+				getCharWeight.style.border = "1px solid #FFFF00";
+				errMessages.push(weightError);
+				
+			};
+			
+			// check for errors and display
+			if (errMessages.length >= 1) {
+				
+				// loop through array of error message in case there is more than 1
+				for(var i=0, j=errMessages.length; i<j; i++) {
+					
+					var errText = document.createElement('li');
+					errText.innerHTML = errMessages[i];
+					errMsg.appendChild(errText);
+					
+				}; // end for loop to display all errors
+				
+				// stop form from doing anything if we have errors
+				e.preventDefault();
+				return false;
+				
+			} else {
+				
+				// run our store data function if field validate
+				storeChar(this.key);
+				
+			};
+			
+		};
+		
 	
 	// Clear Data variables and functions **********
 	
@@ -328,15 +432,19 @@ window.addEventListener("DOMContentLoaded", function() {
 			};
 		
 		};
-	
-	clearChar.addEventListener("click", deleteChar);
-	
+		
 	// Execute Needed Functions and declare variables
-	var genValue;
+	var genValue,
+		errMsg = $('errors');
+		
 	selRace();
 	
-	
-	// Functions for Error Checking and Validation **********
+
+	// Event Listener Calls
+	addChar.addEventListener("click", valChar); // add new character data function
+	displayChar.addEventListener("click", showChar); // display data function
+	clearChar.addEventListener("click", deleteChar); // clear ALL local storage data
+	weight.addEventListener("change", displayWeight); // display weight slider value
 	
 	
 

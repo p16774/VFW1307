@@ -45,7 +45,7 @@ Term: VFW 1307
     
     <!--Start Form Entry-->
     
-	<form action="#" method="post" id="char_form" onSubmit="return validate_form();">
+	<form action="#" method="post" id="char_form" onSubmit="return valChar();">
     
     	<fieldset id="char_info">
         	<!--Named Form Box to supply border around content fields-->
@@ -68,8 +68,8 @@ Term: VFW 1307
                 <li><label for="char_age">Age: </label><input type="number" value="" id="char_age"></li>
                 
                 <!--added slider for range and value changing span through javascript-->
-                <li><label for="char_weigh">Weight: </label><input type="range" value="100" id="char_weigh" min="1" max="300"> &nbsp;
-                <span id="number" class="weight">100</span></li>
+                <li><label for="char_weigh">Weight: </label><input type="range" value="0" id="char_weigh" min="0" max="300"> &nbsp;
+                <span id="number" class="weight">0</span></li>
                 <li><label for="char_birth">BirthDay: </label><input type="date" value="" id="char_birth"></li>
             
                 <!--added size attributes to fill a standard iPhone screen and make it look pretty-->
