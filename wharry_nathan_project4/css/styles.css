@@ -64,7 +64,13 @@ a {
 }
 
 div#charData ul {
-	padding-bottom: 10px;
+	padding: 0px 20px 10px 10px;
+	list-style-type: none;
+}
+
+div#charData ul ul{
+	padding-top: 20px;
+	border-bottom: 1px solid #FFFF00;
 }
 
 

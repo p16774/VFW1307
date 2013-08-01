@@ -198,7 +198,13 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 			if (localStorage.length === 0) {
 				
-				alert("No character data to display!");
+				alert("No character data to display so I created some for you!");
+				
+				// create testing data
+				autoPopulate();
+				
+				// refresh page to load data that was just added
+				showChar();
 				
 			} else {
 			
@@ -231,6 +237,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					// write our data
 					var makeSubList = document.createElement("ul");
 					makeLi.appendChild(makeSubList);
+					getGenderImg(obj.char_gen[1], makeSubList);
 					
 					// loop through data for proper itemization
 					for(var n in obj) {
@@ -252,6 +259,40 @@ window.addEventListener("DOMContentLoaded", function() {
 			}; // end if statement for displaying data
 			
 		}; // end function for displaying data
+		
+		
+		// function to find gender value and assign image
+		function getGenderImg(genType, makeSubList) {
+			
+			// create LI and insert into main UL for each character
+			var imgLi = document.createElement('li');
+			makeSubList.appendChild(imgLi);
+			
+			// create img tag and data and attach to document
+			var newImg = document.createElement('img'),
+				setSrc = newImg.setAttribute("src", "img/" + genType + ".png");
+			imgLi.appendChild(newImg);
+			
+			
+		};
+		
+		
+		// create function to insert testing data
+		function autoPopulate() {
+			
+			// Pull JSON data and store it into localStorage from our json.js file
+			for (var n in json) {
+				
+				// create our unique identifier
+				var id = Math.floor(Math.random()*10000000);
+				
+				// store data
+				localStorage.setItem(id, JSON.stringify(json[n]));
+				
+			}; // end for/in loop
+			
+		}; // end autoPopulate function
+		
 		
 		// create edit and delete links for our stored data items
 		function makeItemLinks(key, linksLi) {
